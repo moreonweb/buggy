@@ -1,0 +1,50 @@
+<ion-view view-title="Profile">
+  <ion-content>
+
+<div class="bar bar-header bar-balanced">
+  <h1 class="title">Welcome</h1>
+</div>
+
+<div class="item item-divider">  
+  </div>
+<div class="list card">
+
+  <div class="item item-avatar">
+    <img src="{{profile.face}}">
+    <h2>{{profile.name}}</h2>
+    <p>{{profile.deseg}}</p>
+  </div>
+
+
+</div>
+
+    <div class="list card">
+      <button class="button button-assertive" ng-click="addnew()">Add Member</button>
+    </div>
+
+<div class="list card" ng-show="addfrm">
+
+  <form name="newmembrForm" ng-submit="addnewmm()">
+  <div class="item item-body">
+       <label class="item item-input"><input type="text" ng-model="addn.username" placeholder="Username"> </label>
+        <label class="item item-input"><input type="text"  ng-model="addn.useremail" placeholder="Email Address"> </label>
+        <label class="item item-input"><input type="radio"  ng-model="addn.useremail" placeholder="Email Address" value="aa"> </label>
+
+          <ion-list ng-repeat="v in value">
+              <ion-radio ng-model="addn.userrole" ng-value="v.role">{{v.role}}</ion-radio>
+          </ion-list>
+  </div>
+
+  <div class="item tabs tabs-secondary tabs-icon-left">
+      <button class="button button-balanced" type="submit">Add</button>
+  </div>
+</form>
+
+</div>
+
+ <div class="list card">
+      <button class="button button-assertive" ui-sref="app.listmem">Show List</button>
+    </div>
+
+  </ion-content>
+</ion-view>

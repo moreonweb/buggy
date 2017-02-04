@@ -1,0 +1,10 @@
+<ion-view view-title="Members" hide-back-button="false">
+  <ion-content>
+	   <div class="card" ng-repeat="profilelist in list" >
+		  <div class="item item-divider">{{profilelist.username}}</div>
+		  <div class="item item-text-wrap">{{profilelist.role}}</div>
+		  <div class="item item-text-wrap">{{profilelist.email}}</div>
+	  </div>
+    </ion-list>
+  </ion-content>
+</ion-view>
