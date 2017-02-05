@@ -1,10 +1,26 @@
-<ion-view view-title="Members" hide-back-button="false">
+<ion-view view-title="Team Members" hide-back-button="false">
   <ion-content>
-	   <div class="card" ng-repeat="profilelist in list" >
+	  <!--  <div class="card" ng-repeat="profilelist in list" >
 		  <div class="item item-divider">{{profilelist.username}}</div>
 		  <div class="item item-text-wrap">{{profilelist.role}}</div>
 		  <div class="item item-text-wrap">{{profilelist.email}}</div>
-	  </div>
+	  </div> -->
+
+	  <div class="list">
+
+    <a class="item item-avatar" ng-repeat="profilelist in list">
+      <img src="img/profile.png">
+      <h2>{{profilelist.username}}</h2>
+      <h4>{{profilelist.email}} </h4>
+      <p>-{{profilelist.role}} </p>
+    </a>
+
+    
+
+</div>
+
+
+
     </ion-list>
   </ion-content>
 </ion-view>

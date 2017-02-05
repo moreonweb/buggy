@@ -1,25 +1,44 @@
+<style type="text/css">
+  
+  .addmember {
+      margin: auto;
+    width: 50%;
+    
+   
+  }
+</style>
 <ion-view view-title="Profile">
   <ion-content>
 
-<div class="bar bar-header bar-balanced">
-  <h1 class="title">Welcome</h1>
-</div>
-
-<div class="item item-divider">  
-  </div>
 <div class="list card">
 
-  <div class="item item-avatar">
-    <img src="{{profile.face}}">
-    <h2>{{profile.name}}</h2>
-    <p>{{profile.deseg}}</p>
-  </div>
+ <a class="item item-icon-left"  ui-sref="app.listmem">
+    <i class="icon ion-person-stalker"></i>
+    Team Members
+    <span class="badge badge-assertive">10</span>
+  </a>
+
+  <a class="item item-icon-left" href="#">
+    <i class="icon ion-bug"></i>
+    Bugs Reported
+    <span class="badge badge-assertive">20</span>
+  </a>
+
+   <a class="item item-icon-left" href="#">
+    <i class="icon ion-checkmark-circled"></i>
+    Bugs Solved
+    <span class="badge badge-assertive">10</span>
+  </a>
 
 
 </div>
 
-    <div class="list card">
-      <button class="button button-assertive" ng-click="addnew()">Add Member</button>
+    <div class="addmember">
+      <!-- <button class="button button-assertive" ng-click="addnew()">Add Member</button> -->
+        <button class="button icon-left ion-person-add button-positive"  ng-click="addnew()">Add Team Members</button>
+
+
+
     </div>
 
 <div class="list card" ng-show="addfrm">
@@ -37,14 +56,32 @@
 
   <div class="item tabs tabs-secondary tabs-icon-left">
       <button class="button button-balanced" type="submit">Add</button>
+
   </div>
 </form>
 
 </div>
 
- <div class="list card">
-      <button class="button button-assertive" ui-sref="app.listmem">Show List</button>
-    </div>
+
+
+
+
+
 
   </ion-content>
+
+  <div class="tabs tabs-icon-left">
+  <a class="tab-item" ui-sref="app.profile">
+    <i class="icon ion-home"></i>
+    Home
+  </a>
+  <a class="tab-item" ui-sref="app.listmem">
+    <i class="icon ion-star"></i>
+    Team Members
+  </a>
+  <a class="tab-item" ui-sref="app.listbug">
+    <i class="icon ion-bug"></i>
+    Bugs Reported
+  </a>
+</div>
 </ion-view>
