@@ -1,7 +1,18 @@
 <ion-view view-title="Module Detail">
   <ion-content>
-<h3 class="header">{{mod_detail_data.modulename}}</h3>
-<h4 class="sub-header">{{mod_detail_data.moduledesc}}</h4>
+
+  <div class="card">
+  <div class="item item-divider">
+   {{mod_detail_data.modulename}}
+  </div>
+  <div class="item item-text-wrap">
+    {{mod_detail_data.moduledesc}}
+  </div>
+  
+</div>
+
+
+
 <div class="item item-divider">Bugs</div>
  <div class="item item-body">
       <!-- <button class="button button-assertive" ng-click="addnew()">Add Member</button> -->

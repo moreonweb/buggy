@@ -236,6 +236,22 @@ angular.module('starter.controllers', [])
 					}
 				}).then(function(res){
 					console.log(res);
+
+					 var ds = res.data;
+						if(ds.status == "success"){
+							$ionicPopup.alert({
+									content : "Module added !"
+
+
+							});
+
+							 $scope.addModfrm = false;
+						}
+
+
+
+
+					//{"status":"success"} 
 				});
 
 		}
@@ -325,6 +341,20 @@ angular.module('starter.controllers', [])
 						console.log(res.data);
 
 						$scope.bug_detail_data = res.data;
+
+						console.log(res);
+
+						 var ds = res.data;
+						if(ds.status == "success"){
+							$ionicPopup.alert({
+									content : "Bug added !"
+									 
+
+							});
+
+							 $scope.addBugfrm = false;
+						}
+
 				});								
 
 				}
@@ -348,7 +378,24 @@ angular.module('starter.controllers', [])
 
 						console.log(res.data);
 
+						
+
+						var ds = res.data;
+						if(ds == "error"){
+							$ionicPopup.alert({
+									content : "Module doesnot have bugs"
+									 
+
+							});
+
+							 $scope.showbgs = false;
+						} else {
 						$scope.bugdata = res.data;
+							
+						}
+
+
+
 				});	
 
 		}
@@ -396,7 +443,9 @@ angular.module('starter.controllers', [])
 				$scope.editbugFrm = function(){
 					console.log($scope.editbug);
 
-					var bdd = "action=upodatebug&bugid="+bugid;
+					console.log($scope.addn);
+		
+					var bdd = "action=updatebug&bugid="+bugid+"&bugname="+$scope.editbug.name+"&bugdesc="+$scope.editbug.desc+"&bugpriority="+$scope.editbug.priority+"&bugstatus="+$scope.editbug.status;
 
 
 					$http({
