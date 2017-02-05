@@ -37,8 +37,6 @@
       <!-- <button class="button button-assertive" ng-click="addnew()">Add Member</button> -->
         <button class="button icon-left ion-person-add button-positive"  ng-click="addnew()">Add Team Members</button>
 
-
-
     </div>
 
 <div class="list card" ng-show="addfrm">
@@ -48,14 +46,13 @@
        <label class="item item-input"><input type="text" ng-model="addn.username" placeholder="Username"> </label>
         <label class="item item-input"><input type="text"  ng-model="addn.useremail" placeholder="Email Address"> </label>
         <label class="item item-input"><input type="radio"  ng-model="addn.useremail" placeholder="Email Address" value="aa"> </label>
-
+        <div class="item item-divider">Select Role</div>
           <ion-list ng-repeat="v in value">
-              <ion-radio ng-model="addn.userrole" ng-value="v.role">{{v.role}}</ion-radio>
+              <ion-radio ng-model="addn.userrole" ng-value="v.role">{{v.role | uppercase }}</ion-radio>
           </ion-list>
-  </div>
+  
 
-  <div class="item tabs tabs-secondary tabs-icon-left">
-      <button class="button button-balanced" type="submit">Add</button>
+      <button class="button outline button-balanced lgn" type="submit">Add</button>
 
   </div>
 </form>

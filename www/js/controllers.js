@@ -45,7 +45,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ProfileCtrl', function($scope, $stateParams , Profiles, $http,$state,$ionicPopup) {
-
+// initiate form and radio array of options
 		$scope.addn = {};
 		$scope.value = [{
 			role : "tester" 
@@ -107,7 +107,9 @@ angular.module('starter.controllers', [])
 			}
 
 })
-.controller('signupCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup) {
+.controller('signupCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
+		$ionicSideMenuDelegate.canDragContent(false);
+
 	$scope.frm = {};
 		$scope.signupbg = function(){
 			if ($scope.frm.uname != "" && $scope.frm.uname != "" && $scope.frm.uname != "" && $scope.frm.uname != "" && $scope.frm.uname != "" ) {
@@ -136,7 +138,15 @@ angular.module('starter.controllers', [])
 			}
 		}
 })
-.controller('loginCtrl', function($scope, $stateParams , Profiles,$http,$state) {
+.controller('loginCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
+	$ionicSideMenuDelegate.canDragContent(false);
+	// check if logged in now ?
+	var chklgn = window.localStorage.getItem("islogged");
+
+			if (chklgn == 1) {
+				$state.go('app.profile');
+			}
+
 			$scope.login = {};
 		$scope.loginvrify = function(){
 				var d = "email="+$scope.login.username+"&pass="+$scope.login.password+"&action=login";
@@ -163,6 +173,12 @@ angular.module('starter.controllers', [])
 								else {
 									$state.go('app.profiles');
 								}
+						}
+						else {
+							$ionicPopup.alert({
+								content : "Wrong username or password, please try again"
+							});
+								$scope.login = {};
 						}
 				});	
 		}
