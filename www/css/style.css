@@ -3362,7 +3362,8 @@ body.grade-c {
   padding-top: 1px;
   margin-bottom: -1px;
   width: auto;
-  height: auto; }
+  height: auto;
+  overflow-y: auto; }
 
 .menu .scroll-content.scroll-content-false {
   z-index: 11; }

@@ -8,13 +8,12 @@
 
 	  <div class="list">
 
-    <a class="item item-avatar" ng-repeat="profilelist in list">
-      <img src="img/profile.png">
-      <h2>{{profilelist.username}}</h2>
-      <h4>{{profilelist.email}} </h4>
-      <p>-{{profilelist.role}} </p>
-    </a>
-
+    <div class="item item-avatar" ng-repeat="profilelist in list">
+      <!-- <img src="img/profile.png"> -->
+      <h2 class="header">Name : <b>{{profilelist.username}}</b></h2>
+      <h4 class="header">E-mail : <b>{{profilelist.email}}</b> </h4>
+      <p>Role : <b>{{profilelist.role}}</b> </p>
+    </div>
     
 
 </div>
