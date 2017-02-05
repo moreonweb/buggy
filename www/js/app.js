@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services','ngMessages'])
 
 .run(function($ionicPlatform , $rootScope, $timeout) {
   $ionicPlatform.ready(function() {
@@ -69,6 +69,7 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
     },
 	authStatus: false
   })
+
  .state('app.signup', {
     url: '/signup',
     views: {
@@ -76,8 +77,7 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
         templateUrl: 'templates/tab-signup.html',
         controller: 'signupCtrl'
       }
-   },
-	authStatus: false
+   }
   })
 //--------------------------------------
    .state('app.listmem', {
@@ -87,10 +87,35 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
         templateUrl: 'templates/memberlist.html',
         controller: 'listmemCtrl'
       }
-   },
-  authStatus: false
+   }
+     })
+   .state('app.module', {
+    url: '/module',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/module.html',
+        controller: 'modCtrl'
+      }
+   }
   })
-
+    .state('app.module-main', {
+    url: '/module-main/:moduleid',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/module-main.html',
+        controller: 'modMainCtrl'
+      }
+   }
+  })
+    .state('app.bug-detail', {
+    url: '/bug-detail/:bugid',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/bug-detail.html',
+        controller: 'bugDetailCtrl'
+      }
+   }
+  })
   .state('app.dashboard', {
     url: '/dashboard',
     views: {

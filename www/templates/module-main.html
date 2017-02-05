@@ -1,0 +1,52 @@
+<ion-view view-title="Module Detail">
+  <ion-content>
+<h3 class="header">{{mod_detail_data.modulename}}</h3>
+<h4 class="sub-header">{{mod_detail_data.moduledesc}}</h4>
+<div class="item item-divider">Bugs</div>
+ <div class="item item-body">
+      <!-- <button class="button button-assertive" ng-click="addnew()">Add Member</button> -->
+       <center> <button class="button icon-left ion-ios-plus button-positive"  ng-click="addnewBug()">Add Bug</button>
+          </center>
+    </div>
+    
+
+<div class="list card" ng-show="addBugfrm">
+
+  <form name="newModule" ng-submit="addnew_bug()">
+  <div class="item item-body">
+  <div class="item item-divider">Bug Info</div>
+       <label class="item item-input"><input type="text" ng-model="bugf.name" placeholder="Bug Name"> </label>
+        <label class="item item-input"><textarea ng-model="bugf.desc" placeholder="Bug Description" rows="6" cols="10"></textarea> </label>
+	
+	<div class="item item-divider">Priority</div>        
+		 <ion-list ng-repeat="v in prlist">
+              <ion-radio name="priority" ng-model="bugf.priority" ng-value="v.name">{{v.name | uppercase }}</ion-radio>
+          </ion-list>
+    <div class="item item-divider">Status</div>        
+		 <ion-list ng-repeat="s in statlist">
+              <ion-radio name="status" ng-model="bugf.status" ng-value="s.status">{{s.status | uppercase }}</ion-radio>
+          </ion-list>      
+
+      <button class="button button-block button-balanced" type="submit">Add Bug</button>
+
+  </div>
+</form>
+
+</div>
+<div class="item item-body">
+       <center> <button class="button icon-left ion-ios-list-outline button-positive"  ng-click="showBugs()">Show Bugs</button>
+          </center>
+    </div>  
+  <!-- List of Modules -->
+    <ion-list ng-show="showbgs">
+      <ion-item ng-repeat="bugs in bugdata track by $index" class="item" ui-sref="app.bug-detail({bugid : bugs.bugid})">
+       <h2>NAME : <b>{{bugs.name}}</b></h2>
+      <p>DESCRIPTION : {{bugs.desc}} </p>
+      <p>PRIORITY : {{bugs.priority}} </p>
+      <p>STATUS : {{bugs.status}} </p>
+      </ion-item>
+       
+    </ion-list>
+
+  </ion-content>
+  </ion-view>

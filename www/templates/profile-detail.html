@@ -1,13 +1,4 @@
-<style type="text/css">
-  
- /* .addmember {
-      margin: auto;
-    width: 50%;
-    
-   
-  }*/
-</style>
-<ion-view view-title="Profile">
+<ion-view view-title="Profile" enable-menu-with-back-views="false">
   <ion-content>
 
 <div class="list card">
@@ -46,7 +37,7 @@
   <div class="item item-divider">Member Info</div>
        <label class="item item-input"><input type="text" ng-model="addn.username" placeholder="Username"> </label>
         <label class="item item-input"><input type="text"  ng-model="addn.useremail" placeholder="Email Address"> </label>
-        <label class="item item-input"><input type="radio"  ng-model="addn.useremail" placeholder="Email Address" value="aa"> </label>
+        
         <div class="item item-divider">Select Role</div>
           <ion-list ng-repeat="v in value">
               <ion-radio ng-model="addn.userrole" ng-value="v.role">{{v.role | uppercase }}</ion-radio>

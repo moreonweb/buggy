@@ -28,7 +28,7 @@ angular.module('starter.controllers', [])
 		
 	};
   //--------------------------------------------
-  $scope.logout = function() {   $location.path('/app/login');   };
+  
   //--------------------------------------------
    // An alert dialog
 	 $scope.showAlert = function(msg) {
@@ -112,9 +112,9 @@ angular.module('starter.controllers', [])
 
 	$scope.frm = {};
 		$scope.signupbg = function(){
-			if ($scope.frm.uname != "" && $scope.frm.uname != "" && $scope.frm.uname != "" && $scope.frm.uname != "" && $scope.frm.uname != "" ) {
-					
-
+			if($scope.frm.uname.length > 0 && $scope.frm.upass.length > 0 
+							&& $scope.frm.uemail.length > 0 && $scope.frm.uteam.length > 0 )
+			{
 			var arr = "name=" +$scope.frm.uname+ "&pass=" +$scope.frm.upass + "&action=register&email=" + $scope.frm.uemail + "&team=" +$scope.frm.uteam +"";
 
 					console.log(arr);
@@ -136,6 +136,12 @@ angular.module('starter.controllers', [])
 				});		
 
 			}
+			else{
+				$ionicPopup.alert({
+					content : "Please fill the form correctly"
+				})
+			}
+			
 		}
 })
 .controller('loginCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
@@ -168,10 +174,17 @@ angular.module('starter.controllers', [])
 							window.localStorage.setItem("islogged",logged);
 									var tid = dd.teamid;
 									window.localStorage.setItem("tid",tid);
+									var role = dd.role;
+									window.localStorage.setItem("role",role);
 									$state.go('app.profile');
 								}
-								else {
-									$state.go('app.profiles');
+								else  {
+									window.localStorage.setItem("islogged",logged);
+									var tid = dd.teamid;
+									window.localStorage.setItem("tid",tid);
+									var role = dd.role;
+									window.localStorage.setItem("role",role);
+									$state.go('app.module');
 								}
 						}
 						else {
@@ -182,8 +195,223 @@ angular.module('starter.controllers', [])
 						}
 				});	
 		}
+// Logout controller
+	$scope.logoutu = function() {   
+			   window.localStorage.removeItem("islogged");
+				window.localStorage.removeItem("tid");
+				$state.go("app.login");
+	   };
+
 })
-.controller('DashCtrl', function($scope, $stateParams , Profiles) {
+/*.controller('DashCtrl', function($scope, $stateParams , Profiles) {
 	$scope.profiles = Profiles.all();
+})*/
+.controller('modCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
+
+		// Toggle
+		$scope.addModfrm = false;
+		$scope.addnewMod = function(){
+			$scope.addModfrm = $scope.addModfrm ? false : true;
+		}
+	
+			var tid = window.localStorage.getItem("tid");
+			var url = "http://pawanmore.com/bug/process.php";
+		// Add new module
+		$scope.modf = {};
+		$scope.addnew_mod = function(){
+
+
+			
+				var modname = $scope.modf.mname;
+				var moddesc = $scope.modf.mdesc;
+				var action = "addmodule";
+				var urdata = "modulename="+modname+"&moduledesc="+moddesc+"&action="+action+"&teamid="+tid;
+				// web service
+				$http({
+					method: 'POST',
+					url : url,
+					data : urdata,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+					console.log(res);
+				});
+
+		}
+
+		// Show all modules !!
+		$scope.showmds = false;
+		$scope.showMods = function(){
+			$scope.showmds = $scope.showmds ? false : true;
+			var pda = "action=showmodules&teamid="+tid;
+				$http({
+					method : 'POST',
+					url : url,
+					data : pda,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+
+						console.log(res.data);
+
+						$scope.moddata = res.data;
+				});
+
+		}
+})
+.controller('modMainCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
+
+			var mid = $stateParams.moduleid;
+
+				$scope.prlist = [{
+			name : "low" 
+			},
+			{
+				name : "medium"
+			},
+			{
+				name : "high"
+			}];
+
+			$scope.statlist = [{status : "pending"},{status : "in progress"},{status : "completed"}];
+
+			var tid = window.localStorage.getItem("tid");
+			var url = "http://pawanmore.com/bug/process.php";
+
+			// Toggle bug div
+			$scope.addBugfrm = false;
+		$scope.addnewBug = function(){
+			$scope.addBugfrm = $scope.addBugfrm ? false : true;
+		}
+				
+		    
+
+				var ud = "action=moduledetails&teamid="+tid+"&moduleid="+mid;
+
+					$http({
+					method : 'POST',
+					url : url,
+					data : ud,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+
+						console.log(res.data);
+
+						$scope.mod_detail_data = res.data;
+				});
+
+
+				// Add new bug
+				$scope.bugf = {};
+
+				$scope.addnew_bug = function(){
+
+						var bdata = "action=addbug&moduleid="+mid+"&teamid="+tid+"&bugname="+$scope.bugf.name+"&bugdesc="+
+										$scope.bugf.desc+"&bugpriority="+$scope.bugf.priority+"&bugstatus="+$scope.bugf.status;
+
+						$http({
+					method : 'POST',
+					url : url,
+					data : bdata,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+
+						console.log(res.data);
+
+						$scope.bug_detail_data = res.data;
+				});								
+
+				}
+
+					// Show list of bugs
+					// Toggle bug div
+			$scope.showbgs = false;
+		$scope.showBugs = function(){
+			$scope.showbgs = $scope.showbgs ? false : true;
+			
+			var shdata = "action=showbugs&teamid="+tid+"&moduleid="+mid;
+
+					$http({
+					method : 'POST',
+					url : url,
+					data : shdata,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+
+						console.log(res.data);
+
+						$scope.bugdata = res.data;
+				});	
+
+		}
+})
+.controller('bugDetailCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
+
+			var bugid = $stateParams.bugid;
+
+			var tid = window.localStorage.getItem("tid");
+			var url = "http://pawanmore.com/bug/process.php";
+
+				var bd = "action=bugdetail&bugid="+bugid+"&teamid="+tid;
+
+				$scope.prlist = [{
+			name : "low" 
+			},
+			{
+				name : "medium"
+			},
+			{
+				name : "high"
+			}];
+
+			$scope.statlist = [{status : "pending"},{status : "in progress"},{status : "completed"}];
+
+				
+				$http({
+					method : 'POST',
+					url : url,
+					data : bd,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+
+						console.log(res.data);
+
+						$scope.bugdetail = res.data;
+
+						$scope.selectedpri = $scope.bugdetail.priority;
+						$scope.selectedstat = $scope.bugdetail.status; 
+				});	
+					// Update Bug
+			$scope.editbug = {};
+				$scope.editbugFrm = function(){
+					console.log($scope.editbug);
+
+					var bdd = "action=upodatebug&bugid="+bugid;
+
+
+					$http({
+					method : 'POST',
+					url : url,
+					data : bdd,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+
+						console.log(res.data);
+				});	
+
+				}
+					
 });
 
