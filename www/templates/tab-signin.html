@@ -5,12 +5,12 @@
     </div>
  </div>
 
-<ion-view view-title="Sign In" class="loginBg" hide-nav-bar="true" >
+<ion-view view-title="Log In" class="loginBg" hide-nav-bar="true" >
 <!-- <ion-nav-title><img src="img/logo.png" width="40"></ion-nav-title> -->
 
   <ion-content class="padding">
 
-  <div class="row responsive-sm padding remvoeBP">
+<!--   <div class="row responsive-sm padding remvoeBP">
 	  <div class="col">
 
 	<div class="app-logo"><img src="img/logo.png"></div> 
@@ -24,12 +24,30 @@
 			</form>
 		</div>	
 	  </div>
-  </div>
+   -->
+   <div class="container">
+     <form name="loginForm" ng-submit="loginvrify()" novalidate>
 
-	<!-- <div class="row  padding removePM">
-	  <div class="col"> <a class=" button-positive button button-block" ng-click="facebookSignIn()"><i class="icon ion-social-facebook"></i></a> </div>
-	  <div class="col"> <a class="button-calm button button-block" ng-click="twitterSignIn()"><i class="icon ion-social-twitter"></i></a> </div>
-	</div> -->
+        <!-- EMAIL -->
+        <div class="form-group" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
+            <label>Username (Your email)</label>
+            <input type="email" name="email" class="form-control" ng-model="login.username">
+            <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block">Enter a valid email.</p>
+        </div>
 
+        <!-- Password -->
+        <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" ng-model="login.password" ng-minlength="4">
+           <!--  <p ng-show="userForm.password.$error.minlength" class="help-block">Password is too short.</p>
+            <p ng-show="userForm.password.$error.maxlength" class="help-block">Password is too long.</p> -->
+        </div>
+                
+        
+        
+        <button type="submit" class="btn" ng-disabled="loginForm.$invalid">LOG IN</button>
+        
+    </form>
+    </div>
   </ion-content>
 </ion-view>

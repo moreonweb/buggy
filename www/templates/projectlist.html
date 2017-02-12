@@ -1,0 +1,25 @@
+<ion-view view-title="Projects" hide-back-button="false">
+  <ion-content>
+	  <!--  <div class="card" ng-repeat="profilelist in list" >
+		  <div class="item item-divider">{{profilelist.username}}</div>
+		  <div class="item item-text-wrap">{{profilelist.role}}</div>
+		  <div class="item item-text-wrap">{{profilelist.email}}</div>
+	  </div> -->
+
+	  <div class="list">
+
+    <div class="item item-avatar" ng-repeat="projectlist in plist" ui-sref="app.project-detail({projectid : projectlist.projectid})">
+      <!-- <img src="img/profile.png"> -->
+      <h2 class="header">Name : <b>{{projectlist.projectname}}</b></h2>
+      <h4 class="sub-header">Description : <b>{{projectlist.projectdesc}}</b> </h4>
+      
+    </div>
+    
+
+</div>
+
+
+
+    </ion-list>
+  </ion-content>
+</ion-view>

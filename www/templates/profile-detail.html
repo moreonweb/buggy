@@ -51,6 +51,28 @@
 
 </div>
 
+<!-- Add project toooooo -->
+<div class="item item-body">
+      <!-- <button class="button button-assertive" ng-click="addnew()">Add Member</button> -->
+       <center> <button class="button icon-left ion-person-add button-positive"  ng-click="addnewProject()">Add Project</button>
+          </center>
+    </div>
+
+<div class="list card" ng-show="addProjectfrm">
+
+  <form name="newprojectForm" ng-submit="addnewpp()">
+  <div class="item item-body">
+  <div class="item item-divider">Project Info</div>
+     
+       <label class="item item-input"><input type="text" ng-model="addp.pname" placeholder="Project Name"> </label>
+      <label class="item item-input"><textarea   ng-model="addp.pdesc" placeholder="Project Description" rows="4" cols="10"></textarea> </label>
+     
+      <button class="button button-block button-balanced lgn" type="submit">Add Project</button>
+
+  </div>
+</form>
+
+</div>
 
 
 

@@ -1,0 +1,38 @@
+ <ion-view view-title="Add Module" enable-menu-with-back-views="false">
+  <ion-content>
+ <div class="item item-body">
+      <!-- <button class="button button-assertive" ng-click="addnew()">Add Member</button> -->
+       <center> <button class="button icon-left ion-ios-plus button-positive"  ng-click="addnewMod()">Add Modules</button>
+          </center>
+    </div>
+    
+
+<div class="list card" ng-show="addModfrm">
+
+  <form name="newModule" ng-submit="addnew_mod()">
+  <div class="item item-body">
+  <div class="item item-divider">Module Info</div>
+       <label class="item item-input"><input type="text" ng-model="modf.mname" placeholder="Module Name"> </label>
+        <label class="item item-input"><textarea   ng-model="modf.mdesc" placeholder="Module Description" rows="8" cols="10"></textarea> </label>
+
+      <button class="button button-block button-balanced" type="submit">Add Module</button>
+
+  </div>
+</form>
+
+</div>
+<div class="item item-body">
+       <center> <button class="button icon-left ion-ios-list-outline button-positive"  ng-click="showMods()">Show Modules</button>
+          </center>
+    </div>  
+  <!-- List of Modules -->
+    <ion-list ng-show="showmds">
+      <ion-item ng-repeat="mods in moddata" class="item" ui-sref="app.module-main({moduleid : mods.moduleid})">
+       <h2>NAME : <b>{{mods.modulename}}</b></h2>
+      <p>DESCRIPTION : {{mods.moduledesc}} </p>
+      </ion-item>
+       
+    </ion-list>
+  
+</ion-content>
+</ion-view>

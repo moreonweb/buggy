@@ -54,16 +54,26 @@ angular.module('starter.controllers', [])
 				role : "developer"
 			} 
 		];
-		//get tid
+		
+		// Toggle add member div
 		$scope.addfrm = false;
 		$scope.addnew = function(){
 			$scope.addfrm = $scope.addfrm ? false : true;
 		}
+		// Toggle add project div
+		$scope.addProjectfrm = false;
+		$scope.addnewProject = function(){
+			$scope.addProjectfrm = $scope.addProjectfrm ? false : true;
+		}
+
+		//get tid
 		var teamid =  window.localStorage.getItem("tid");
 
+			var addurl = "http://pawanmore.com/bug/process.php";
+		// Add member function
 	$scope.addnewmm = function(){
 		console.log($scope.addn);
-			var addurl = "http://pawanmore.com/bug/process.php";
+			
 
 			var add_data = "username="+$scope.addn.username+"&teamid="+teamid+"&email="+$scope.addn.useremail+"&action=adduser&userrole="+$scope.addn.userrole;
 
@@ -86,6 +96,30 @@ angular.module('starter.controllers', [])
 						}
 				});		
 	}
+				$scope.addp = {};
+	// Add project function
+			$scope.addnewpp = function(){
+					var add_proj_data = "projectname="+$scope.addp.pname+"&projectdesc="+$scope.addp.pdesc+"&teamid="+teamid+"&action=addproject";
+					$http({
+					method: 'POST',
+					url : addurl,
+					data : add_proj_data,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+					console.log(res);
+					 var ds = res.data;
+						if(ds.status == "success"){
+							// var pid = ds.projectid ;
+							$ionicPopup.alert({
+									content : "Project added !"
+							});
+
+							$scope.addProjectfrm = false;
+						}
+				});	
+			}
 })
 //get list of team members under one leader
 .controller('listmemCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup) {
@@ -101,7 +135,7 @@ angular.module('starter.controllers', [])
 					
 					 var ds = res.data;
 						$scope.list = ds;
-										});		
+						});		
 
 
 			}
@@ -153,9 +187,14 @@ angular.module('starter.controllers', [])
 				$state.go('app.profile');
 			}
 
-			$scope.login = {};
+			 $scope.login = {};
 		$scope.loginvrify = function(){
+		
+				 var uname = $scope.login.username;
+          		var upass = $scope.login.password;
+
 				var d = "email="+$scope.login.username+"&pass="+$scope.login.password+"&action=login";
+				
 				var url = "http://pawanmore.com/bug/process.php";
 				$http({
 					method: 'POST',
@@ -194,7 +233,8 @@ angular.module('starter.controllers', [])
 								$scope.login = {};
 						}
 				});	
-		}
+		
+	}
 // Logout controller
 	$scope.logoutu = function() {   
 			   window.localStorage.removeItem("islogged");
@@ -206,77 +246,13 @@ angular.module('starter.controllers', [])
 /*.controller('DashCtrl', function($scope, $stateParams , Profiles) {
 	$scope.profiles = Profiles.all();
 })*/
-.controller('modCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
+/*.controller('modCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
 
-		// Toggle
-		$scope.addModfrm = false;
-		$scope.addnewMod = function(){
-			$scope.addModfrm = $scope.addModfrm ? false : true;
-		}
 	
-			var tid = window.localStorage.getItem("tid");
-			var url = "http://pawanmore.com/bug/process.php";
-		// Add new module
-		$scope.modf = {};
-		$scope.addnew_mod = function(){
-
-
-			
-				var modname = $scope.modf.mname;
-				var moddesc = $scope.modf.mdesc;
-				var action = "addmodule";
-				var urdata = "modulename="+modname+"&moduledesc="+moddesc+"&action="+action+"&teamid="+tid;
-				// web service
-				$http({
-					method: 'POST',
-					url : url,
-					data : urdata,
-					headers : {
-						'Content-Type' : 'application/x-www-form-urlencoded'
-					}
-				}).then(function(res){
-					console.log(res);
-
-					 var ds = res.data;
-						if(ds.status == "success"){
-							$ionicPopup.alert({
-									content : "Module added !"
-
-
-							});
-
-							 $scope.addModfrm = false;
-						}
-
-
-
-
-					//{"status":"success"} 
-				});
-
 		}
 
-		// Show all modules !!
-		$scope.showmds = false;
-		$scope.showMods = function(){
-			$scope.showmds = $scope.showmds ? false : true;
-			var pda = "action=showmodules&teamid="+tid;
-				$http({
-					method : 'POST',
-					url : url,
-					data : pda,
-					headers : {
-						'Content-Type' : 'application/x-www-form-urlencoded'
-					}
-				}).then(function(res){
-
-						console.log(res.data);
-
-						$scope.moddata = res.data;
-				});
-
-		}
-})
+		
+})*/
 .controller('modMainCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
 
 			var mid = $stateParams.moduleid;
@@ -400,7 +376,9 @@ angular.module('starter.controllers', [])
 
 		}
 })
-.controller('bugDetailCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
+.controller('bugDetailCtrl', function($scope, $stateParams , Profiles,$http,$state,
+	$ionicPopup,$ionicSideMenuDelegate,$ionicModal) {
+
 
 			var bugid = $stateParams.bugid;
 
@@ -462,5 +440,104 @@ angular.module('starter.controllers', [])
 
 				}
 					
+})
+.controller('ProjectCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
+
+
+
+})
+.controller('ProjectDetailCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
+
+			var pid = $stateParams.projectid;
+
+						// Toggle
+		$scope.addModfrm = false;
+		$scope.addnewMod = function(){
+			$scope.addModfrm = $scope.addModfrm ? false : true;
+		}
+	
+			// var tid = window.localStorage.getItem("tid");
+			var url = "http://pawanmore.com/bug/process.php";
+		// Add new module
+		$scope.modf = {};
+		$scope.addnew_mod = function(){
+
+
+			
+				var modname = $scope.modf.mname;
+				var moddesc = $scope.modf.mdesc;
+				var action = "addmodule";
+				var urdata = "modulename="+modname+"&moduledesc="+moddesc+"&action="+action+"&projectid="+pid;
+				// web service
+				$http({
+					method: 'POST',
+					url : url,
+					data : urdata,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+					console.log(res);
+
+					 var ds = res.data;
+						if(ds.status == "success"){
+							$ionicPopup.alert({
+									content : "Module added !"
+
+
+							});
+
+							 $scope.addModfrm = false;
+						}
+
+
+
+
+					//{"status":"success"} 
+				});
+			}
+				// Show all modules !!
+		$scope.showmds = false;
+		$scope.showMods = function(){
+			$scope.showmds = $scope.showmds ? false : true;
+			var pda = "action=showmodules&projectid="+pid;
+				$http({
+					method : 'POST',
+					url : url,
+					data : pda,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+
+						console.log(res.data);
+
+						$scope.moddata = res.data;
+				});
+
+		}
+
+
+
+})
+//get list of team members under one leader
+.controller('listprojCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup) {
+
+		var req = "showprojects";
+		var teamid =  window.localStorage.getItem("tid");
+
+
+			if(teamid){
+					var lisurl = "http://pawanmore.com/bug/process.php?teamid="+teamid+"&request="+req+"";
+
+					$http.get(lisurl).then(function(res){	
+					
+					 var ds = res.data;
+						$scope.plist = ds;
+						});		
+
+
+			}
+
 });
 

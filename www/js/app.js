@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers','starter.services' ])
 
 .run(function($ionicPlatform , $rootScope, $timeout) {
   $ionicPlatform.ready(function() {
@@ -21,7 +21,7 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
     }
   });
 
-     $rootScope.authStatus = false;
+     /*$rootScope.authStatus = false;
 	 //stateChange event
 	  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
 		  $rootScope.authStatus = toState.authStatus;
@@ -29,9 +29,9 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
 			  
 			
 		  }
-    });
+    });*/
 
-	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+	/*$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
 		console.log("URL : "+toState.url);
 		if(toState.url=='/dashboard'){
 			console.log("match : "+toState.url);
@@ -40,7 +40,7 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
 			},1000);
 		}	
 	});
-
+*/
 })
 .config(['$ionicConfigProvider', function($ionicConfigProvider) {
 
@@ -66,8 +66,7 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
         templateUrl: 'templates/tab-signin.html',
         controller: 'loginCtrl'
       }
-    },
-	authStatus: false
+    }
   })
 
  .state('app.signup', {
@@ -81,7 +80,7 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
   })
 //--------------------------------------
    .state('app.listmem', {
-    url: '/signup',
+    url: '/listmem',
     views: {
       'menuContent': {
         templateUrl: 'templates/memberlist.html',
@@ -89,7 +88,35 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
       }
    }
      })
-   .state('app.module', {
+   .state('app.listproj', {
+    url: '/listprojects',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/projectlist.html',
+        controller: 'listprojCtrl'
+      }
+   }
+     })
+   /*Project Main state*/
+   .state('app.project', {
+    url: '/project',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/project.html',
+    controller: 'ProjectCtrl'
+      }
+     }
+  })
+    .state('app.project-detail', {
+    url: '/project-detail/:projectid',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/project-detail.html',
+    controller: 'ProjectDetailCtrl'
+      }
+     }
+  })
+/*   .state('app.module', {
     url: '/module',
     views: {
       'menuContent': {
@@ -97,7 +124,7 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
         controller: 'modCtrl'
       }
    }
-  })
+  })*/
     .state('app.module-main', {
     url: '/module-main/:moduleid',
     views: {
@@ -123,8 +150,7 @@ angular.module('starter', ['ionic', 'starter.controllers' , 'starter.services'])
         templateUrl: 'templates/dashboard.html',
 		controller: 'DashCtrl'
       }
-     },
-	 authStatus: true
+     }
   })
 
 
