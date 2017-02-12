@@ -8,7 +8,7 @@
 <ion-view view-title="Sign Up" class="loginBg" hide-nav-bar="true" >
   <ion-content class="padding">
 
-  <div class="row responsive-sm padding remvoeBP">
+  <!-- <div class="row responsive-sm padding remvoeBP">
 	  <div class="col">
 		   <div class="app-logo"><img src="img/logo.png"></div>
 			
@@ -44,12 +44,53 @@
         </div>
 			
 	  </div>
-  </div>
+  </div> -->
 <!-- 
 	<div class="row  padding removePM">
 	  <div class="col"> <a class=" button-positive button button-block" ng-click="facebookSignIn()"><i class="icon ion-social-facebook"></i></a> </div>
 	  <div class="col"> <a class="button-calm button button-block" ng-click="twitterSignIn()"><i class="icon ion-social-twitter"></i></a> </div>
 	</div> -->
 
+
+
+  <div class="container">
+     <form name="signupForm" ng-submit="signupbg()" novalidate>
+
+        <!-- EMAIL -->
+        <div class="form-group">
+            <label>Username </label>
+            <input type="text" name="Username" class="form-control" ng-model="frm.uname">
+           
+        </div>
+
+         <div class="form-group" ng-class="{ 'has-error' : frm.email.$invalid && !frm.email.$pristine }">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" ng-model="frm.uemail">
+            <p ng-show="frm.email.$invalid && !frm.email.$pristine" class="help-block">Enter a valid email.</p>
+        </div>
+
+<!-- <input type="text" ng-model="frm.uteam" placeholder="Team Name" required> -->
+
+
+  <div class="form-group">
+            <label>Team Name</label>
+            <input type="text" name="teamname" class="form-control" ng-model="frm.uteam">
+          
+        </div>
+
+        <!-- Password -->
+        <div class="form-group" ng-class="{ 'has-error' : frm.upass.$invalid && !frm.upass.$pristine }">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" ng-model="frm.upass" ng-minlength="4">
+           <!--  <p ng-show="userForm.password.$error.minlength" class="help-block">Password is too short.</p>
+            <p ng-show="userForm.password.$error.maxlength" class="help-block">Password is too long.</p> -->
+        </div>
+                
+        
+        
+        <button type="submit" class="btn" ng-disabled="signupForm.$invalid">LOG IN</button>
+        
+    </form>
+    </div>
   </ion-content>
 </ion-view>
