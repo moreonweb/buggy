@@ -45,13 +45,16 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ProfileCtrl', function($scope, $stateParams , Profiles, $http,$state,$ionicPopup) {
-		/*Get and verify roles*/
-			var role = window.localStorage.getItem("role");
-				if(role){
-					if(role == "teamleader"){
+		function rolecheck(){ 
+           return window.localStorage.getItem("role");
+           }
+        $scope.$watchCollection(rolecheck,function(newVal,oldVal){
+            
+              if(newVal == "teamleader"){
 						$scope.supersen = true ;
 					}
-				}
+        });
+		
 			
 // initiate form and radio array of options
 		$scope.addn = {};
@@ -247,7 +250,7 @@ angular.module('starter.controllers', [])
 	$scope.logoutu = function() {   
 			   window.localStorage.removeItem("islogged");
 				window.localStorage.removeItem("tid");
-				$state.go("app.login",null,{reload: true});
+				$state.go("app.login",{},{reload: true});
 	   };
 
 })
