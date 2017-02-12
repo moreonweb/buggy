@@ -45,6 +45,14 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ProfileCtrl', function($scope, $stateParams , Profiles, $http,$state,$ionicPopup) {
+		/*Get and verify roles*/
+			var role = window.localStorage.getItem("role");
+				if(role){
+					if(role == "teamleader"){
+						$scope.supersen = true ;
+					}
+				}
+			
 // initiate form and radio array of options
 		$scope.addn = {};
 		$scope.value = [{
@@ -223,7 +231,7 @@ angular.module('starter.controllers', [])
 									window.localStorage.setItem("tid",tid);
 									var role = dd.role;
 									window.localStorage.setItem("role",role);
-									$state.go('app.module');
+									$state.go('app.profile');
 								}
 						}
 						else {
@@ -239,7 +247,7 @@ angular.module('starter.controllers', [])
 	$scope.logoutu = function() {   
 			   window.localStorage.removeItem("islogged");
 				window.localStorage.removeItem("tid");
-				$state.go("app.login");
+				$state.go("app.login",null,{reload: true});
 	   };
 
 })
@@ -387,7 +395,32 @@ angular.module('starter.controllers', [])
 
 				var bd = "action=bugdetail&bugid="+bugid+"&teamid="+tid;
 
-				$scope.prlist = [{
+				
+				$http({
+					method : 'POST',
+					url : url,
+					data : bd,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+
+						console.log(res.data);
+
+						$scope.bugdetail = res.data;
+
+						$scope.selectedpri = $scope.bugdetail.priority;
+						$scope.selectedstat = $scope.bugdetail.status; 
+				});	
+					
+					
+})
+.controller('bugEditCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
+						var bugid = $stateParams.bugid;
+
+			var tid = window.localStorage.getItem("tid");
+			var url = "http://pawanmore.com/bug/process.php";
+			$scope.prlist = [{
 			name : "low" 
 			},
 			{
@@ -398,6 +431,8 @@ angular.module('starter.controllers', [])
 			}];
 
 			$scope.statlist = [{status : "pending"},{status : "in progress"},{status : "completed"}];
+
+				var bd = "action=bugdetail&bugid="+bugid+"&teamid="+tid;
 
 				
 				$http({
@@ -416,7 +451,8 @@ angular.module('starter.controllers', [])
 						$scope.selectedpri = $scope.bugdetail.priority;
 						$scope.selectedstat = $scope.bugdetail.status; 
 				});	
-					// Update Bug
+				
+			// Update Bug
 			$scope.editbug = {};
 				$scope.editbugFrm = function(){
 					console.log($scope.editbug);
@@ -439,10 +475,6 @@ angular.module('starter.controllers', [])
 				});	
 
 				}
-					
-})
-.controller('ProjectCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
-
 
 
 })

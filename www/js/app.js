@@ -98,7 +98,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services' ])
    }
      })
    /*Project Main state*/
-   .state('app.project', {
+/*   .state('app.project', {
     url: '/project',
     views: {
       'menuContent': {
@@ -106,7 +106,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services' ])
     controller: 'ProjectCtrl'
       }
      }
-  })
+  })*/
     .state('app.project-detail', {
     url: '/project-detail/:projectid',
     views: {
@@ -140,6 +140,15 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services' ])
       'menuContent': {
         templateUrl: 'templates/bug-detail.html',
         controller: 'bugDetailCtrl'
+      }
+   }
+  })
+      .state('app.bugedit', {
+    url: '/bugedit/:bugid',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/bug-edit.html',
+        controller: 'bugEditCtrl'
       }
    }
   })

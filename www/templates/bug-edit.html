@@ -1,0 +1,37 @@
+<ion-view view-title="Edit Bug">
+
+  <ion-content>
+  <div class="card">
+  <center>
+  	<h5 class="sub-header">Current Priority : <span>{{bugdetail.priority}}</span></h5>
+  		<h5 class="sub-header">Current Status : <span>{{bugdetail.status}}</span></h5>
+  </center>	
+  </div>
+  		
+        <div class="container">
+        		<form name="editbugs" ng-submit="editbugFrm()">
+          <!-- Bug edit -->
+          <div class="item item-body">
+  <div class="item item-divider">Bug Info</div>
+       <label class="item item-input"><input type="text" ng-model="editbug.name" placeholder="{{bugdetail.name}}"> </label>
+        
+        <label class="item item-input">
+        <textarea ng-model="editbug.desc" placeholder="{{bugdetail.desc}}" rows="4" cols="6"></textarea> </label>
+  
+  <div class="item item-divider">Priority</div>        
+     <ion-list ng-repeat="v in prlist">
+              <ion-radio name="bpriority" ng-model="editbug.priority" ng-value="v.name">{{v.name | uppercase }}</ion-radio>
+          </ion-list>
+    <div class="item item-divider">Status</div>        
+     <ion-list ng-repeat="s in statlist">
+              <ion-radio name="bstatus" ng-model="editbug.status" ng-value="s.status">{{s.status | uppercase }}</ion-radio>
+          </ion-list>      
+
+      <button class="button button-block button-balanced" type="submit">Update Bug</button>
+
+  </div>
+          <!-- Bug edit end -->
+        </form> 
+        </div>
+  </ion-content>
+  </ion-view>

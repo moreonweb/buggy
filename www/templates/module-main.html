@@ -53,10 +53,10 @@
       <ion-item ng-repeat="bugs in bugdata track by $index" class="item" ui-sref="app.bug-detail({bugid : bugs.bugid})">
        <h2>NAME : <b>{{bugs.name}}</b></h2>
       <p>DESCRIPTION : {{bugs.desc}} </p>
-      <p>PRIORITY : <span ng-class="{
+      <p>PRIORITY : <B><span ng-class="{
         'color-red': bugs.priority === 'high', 
         'color-blue': bugs.priority === 'medium', 
-        'color-green': bugs.priority === 'low'}">{{bugs.priority}} </span></p>
+        'color-green': bugs.priority === 'low'}">{{bugs.priority}} </span></B>  </p>
       <p>STATUS : {{bugs.status}} </p>
       </ion-item>
        
