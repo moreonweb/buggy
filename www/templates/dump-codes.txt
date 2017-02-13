@@ -1,0 +1,24 @@
+   <div class="container">
+     <form name="loginForm" ng-submit="loginvrify()" class="form-horizontal" novalidate>
+
+        <!-- EMAIL -->
+        <div class="form-group" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
+            <label>Username (Your email)</label>
+            <input type="email" name="email" class="form-control" ng-model="login.username">
+            <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block">Enter a valid email.</p>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" ng-model="login.password" ng-minlength="4">
+           <!--  <p ng-show="userForm.password.$error.minlength" class="help-block">Password is too short.</p>
+            <p ng-show="userForm.password.$error.maxlength" class="help-block">Password is too long.</p> -->
+        </div>
+                
+        
+        
+        <button type="submit" class="btn" ng-disabled="loginForm.$invalid">LOG IN</button>
+        
+    </form>
+    </div>

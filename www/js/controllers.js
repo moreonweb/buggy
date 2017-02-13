@@ -44,17 +44,14 @@ angular.module('starter.controllers', [])
     $scope.profiles = Profiles.all();
 })
 
-.controller('ProfileCtrl', function($scope, $stateParams , Profiles, $http,$state,$ionicPopup) {
-		function rolecheck(){ 
-           return window.localStorage.getItem("role");
-           }
-        $scope.$watchCollection(rolecheck,function(newVal,oldVal){
-            
-              if(newVal == "teamleader"){
-						$scope.supersen = true ;
-					}
-        });
-		
+.controller('ProfileCtrl', function($scope, $stateParams ,
+	 Profiles, $http,$state,$ionicPopup,$rootScope) {
+							
+
+				var r = $stateParams.role;
+					if (r == "teamleader") {
+						$scope.supersen = true;
+					}	
 			
 // initiate form and radio array of options
 		$scope.addn = {};
@@ -189,13 +186,15 @@ angular.module('starter.controllers', [])
 			
 		}
 })
-.controller('loginCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
+.controller('loginCtrl', function($scope, $stateParams ,$rootScope,
+		$ionicHistory, Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
 	$ionicSideMenuDelegate.canDragContent(false);
 	// check if logged in now ?
 	var chklgn = window.localStorage.getItem("islogged");
+	var role = window.localStorage.getItem("role");
 
 			if (chklgn == 1) {
-				$state.go('app.profile');
+				$state.go('app.profile',{role : role});
 			}
 
 			 $scope.login = {};
@@ -218,23 +217,30 @@ angular.module('starter.controllers', [])
 					console.log(res);
 						var dd = res.data;
 						if(dd.status == "success"){
+							var logged = 1;
 							//for leader
 								if(dd.role == "teamleader"){
-									var logged = 1;
+									
 							window.localStorage.setItem("islogged",logged);
 									var tid = dd.teamid;
 									window.localStorage.setItem("tid",tid);
 									var role = dd.role;
+										$rootScope.name = 'sensei';
 									window.localStorage.setItem("role",role);
-									$state.go('app.profile');
+									$state.go('app.profile',{role : role});
+										// Disable back on next state
+										 $ionicHistory.nextViewOptions({
+										            historyRoot: true
+										          });
 								}
 								else  {
 									window.localStorage.setItem("islogged",logged);
 									var tid = dd.teamid;
 									window.localStorage.setItem("tid",tid);
 									var role = dd.role;
+											
 									window.localStorage.setItem("role",role);
-									$state.go('app.profile');
+									$state.go('app.profile',{role : role});
 								}
 						}
 						else {

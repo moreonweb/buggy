@@ -174,7 +174,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services' ])
     })
 
   .state('app.profile', {
-    url: '/profile',
+    url: '/profile/:role',
     views: {
       'menuContent': {
         templateUrl: 'templates/profile-detail.html',
