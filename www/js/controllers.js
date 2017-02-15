@@ -78,6 +78,29 @@ angular.module('starter.controllers', [])
 		var teamid =  window.localStorage.getItem("tid");
 
 			var addurl = "http://pawanmore.com/bug/process.php";
+
+			// Creting new service for profile stat
+			var dataForProfile = "action=profilestat&teamid="+teamid;
+
+			$http({
+					method: 'POST',
+					url : addurl,
+					data : dataForProfile,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+					console.log(res);
+					 var profiledata = res.data;
+						if (profiledata) {
+							console.log(profiledata);
+						}
+						else{
+							console.log("service not started yet !!!");
+						}
+
+				});	
+
 		// Add member function
 	$scope.addnewmm = function(){
 		console.log($scope.addn);
