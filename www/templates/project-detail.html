@@ -1,5 +1,23 @@
  <ion-view view-title="Add Module" enable-menu-with-back-views="false">
+
   <ion-content>
+ 
+    <div class="list card">
+
+<a class="item item-icon-left"  ui-sref="app.listmem">
+   <i class="icon ion-person-stalker"></i>
+   Total Modules
+   <span class="badge badge-assertive">{{modulestat.modules}}</span>
+ </a>
+
+ 
+
+
+</div>
+
+
+
+
  <div class="item item-body">
       <!-- <button class="button button-assertive" ng-click="addnew()">Add Member</button> -->
        <center> <button class="button icon-left ion-ios-plus button-positive"  ng-click="addnewMod()">Add Modules</button>
@@ -25,9 +43,11 @@
        <center> <button class="button icon-left ion-ios-list-outline button-positive"  ng-click="showMods()">Show Modules</button>
           </center>
     </div>  
+
+
   <!-- List of Modules -->
     <ion-list ng-show="showmds">
-      <ion-item ng-repeat="mods in moddata" class="item" ui-sref="app.module-main({moduleid : mods.moduleid})">
+      <ion-item ng-repeat="mods in moddata track by $index" class="item" ui-sref="app.module-main({moduleid : mods.moduleid})"  ui-sref-opts="{reload: true}">
        <h2>NAME : <b>{{mods.modulename}}</b></h2>
       <p>DESCRIPTION : {{mods.moduledesc}} </p>
       </ion-item>

@@ -289,12 +289,28 @@ angular.module('starter.controllers', [])
 			var tid = window.localStorage.getItem("tid");
 			var url = "http://pawanmore.com/bug/process.php";
 
+					var bugstatd = "action=bugstat&moduleid=" + mid;
+
+						$http({
+					method : 'POST',
+					url : url,
+					data : bugstatd,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+
+						$scope.bugsbystatus = res.data;
+
+					});
+
 			// Toggle bug div
 			$scope.addBugfrm = false;
 		$scope.addnewBug = function(){
 			$scope.addBugfrm = $scope.addBugfrm ? false : true;
 		}
 				
+
 		    
 
 				var ud = "action=moduledetails&teamid="+tid+"&moduleid="+mid;
@@ -374,9 +390,10 @@ angular.module('starter.controllers', [])
 						
 
 						var ds = res.data;
+						console.log(ds.length);
 						if(ds == "error"){
 							$ionicPopup.alert({
-									content : "Module doesnot have bugs"
+									content : "Module does not have bugs"
 									 
 
 							});
@@ -496,9 +513,29 @@ angular.module('starter.controllers', [])
 		$scope.addnewMod = function(){
 			$scope.addModfrm = $scope.addModfrm ? false : true;
 		}
-	
+
+					var url = "http://pawanmore.com/bug/process.php";
+
+					
+
+		/*count action...*/
+				var countdata = "action=modulestat&projectid="+ pid;
+
+				console.log(countdata);
+				// web service
+				$http({
+					method: 'POST',
+					url : url,
+					data : countdata,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+				 var rr = res.data;
+						$scope.modulestat = res.data;
+
+			});
 			// var tid = window.localStorage.getItem("tid");
-			var url = "http://pawanmore.com/bug/process.php";
 		// Add new module
 		$scope.modf = {};
 		$scope.addnew_mod = function(){
