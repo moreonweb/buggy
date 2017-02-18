@@ -8,7 +8,12 @@ angular.module('starter.controllers', [])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-
+// Check for state here toooo
+	var rolecheck = window.localStorage.getItem("role");
+	// console.log(rolecheck);
+	if(rolecheck){
+		$scope.rolecheck = rolecheck;
+	}
   // Form data for the login modal
   $scope.loginData = {};
 

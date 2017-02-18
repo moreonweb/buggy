@@ -8,7 +8,7 @@
 
 
 
-     <div class="panel panel-info" ng-repeat="projectlist in plist track by $index" ui-sref="app.project-detail({projectid : projectlist.projectid})" ui-sref-opts="{reload: true}">
+     <div class="panel panel-info" ng-repeat="projectlist in plist" ui-sref="app.project-detail({projectid : projectlist.projectid})" ui-sref-opts="{reload: true}">
   <div class="panel-heading">{{projectlist.projectname}}</div>
   <div class="panel-body">
      <p class="header"><b>{{projectlist.projectdesc}}</b></p>
