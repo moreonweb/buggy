@@ -6,15 +6,21 @@
 		  <div class="item item-text-wrap">{{profilelist.email}}</div>
 	  </div> -->
 
-	  <div class="list">
+	  <div class="list-group">
 
-    <div class="item item-avatar" ng-repeat="profilelist in list">
-      <!-- <img src="img/profile.png"> -->
-      <h2 class="header">Name : <b>{{profilelist.username}}</b></h2>
-      <h4 class="header">E-mail : <b>{{profilelist.email}}</b> </h4>
-      <p>Role : <b>{{profilelist.role}}</b> </p>
-    </div>
-    
+    <!-- <div class="list-group-item item-avatar" ng-repeat="profilelist in list">
+     <img src="img/profile.png"> 
+      <h4 class="header">Name : <b>{{profilelist.username | uppercase}}</b></h4>
+      <h4 class="header">E-mail : <b>{{profilelist.email | uppercase}}</b> </h4>
+      <h4 class="header">Role : <b>{{profilelist.role | uppercase}}</b> </h4>
+    </div> -->
+    <div class="panel panel-info" ng-repeat="profilelist in list">
+  <div class="panel-heading">{{profilelist.role | uppercase}}</div>
+  <div class="panel-body">
+     <p class="header">Name : <b>{{profilelist.username | uppercase}}</b></p>
+      <p class="header">E-mail : <b>{{profilelist.email | uppercase}}</b> </p>
+  </div>
+</div>
 
 </div>
 

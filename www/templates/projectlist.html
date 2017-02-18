@@ -6,17 +6,16 @@
 		  <div class="item item-text-wrap">{{profilelist.email}}</div>
 	  </div> -->
 
-	  <div class="list">
 
-    <div class="item item-avatar" ng-repeat="projectlist in plist track by $index" ui-sref="app.project-detail({projectid : projectlist.projectid})" ui-sref-opts="{reload: true}">
-      <!-- <img src="img/profile.png"> -->
-      <h2 class="header">Name : <b>{{projectlist.projectname}}</b></h2>
-      <h4 class="sub-header">Description : <b>{{projectlist.projectdesc}}</b> </h4>
+
+     <div class="panel panel-info" ng-repeat="projectlist in plist track by $index" ui-sref="app.project-detail({projectid : projectlist.projectid})" ui-sref-opts="{reload: true}">
+  <div class="panel-heading">{{projectlist.projectname}}</div>
+  <div class="panel-body">
+     <p class="header"><b>{{projectlist.projectdesc}}</b></p>
       
-    </div>
-    
-
+  </div>
 </div>
+
 
 
 

@@ -217,7 +217,10 @@ angular.module('starter.controllers', [])
 	var role = window.localStorage.getItem("role");
 
 			if (chklgn == 1) {
-				$state.go('app.profile',{role : role});
+				$state.go('app.profile',{role : role},{reload:true});
+				$ionicHistory.nextViewOptions({
+					  disableBack : true
+					});
 			}
 
 			 $scope.login = {};
