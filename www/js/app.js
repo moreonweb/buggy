@@ -90,6 +90,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services' ])
      })
    .state('app.listproj', {
     url: '/listprojects',
+    cache:false,
     views: {
       'menuContent': {
         templateUrl: 'templates/projectlist.html',
@@ -109,6 +110,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services' ])
   })*/
     .state('app.project-detail', {
     url: '/project-detail/:projectid',
+    cache:false,
     views: {
       'menuContent': {
         templateUrl: 'templates/project-detail.html',
@@ -127,6 +129,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services' ])
   })*/
     .state('app.module-main', {
     url: '/module-main/:moduleid',
+    cache:false,
     views: {
       'menuContent': {
         templateUrl: 'templates/module-main.html',

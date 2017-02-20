@@ -23,7 +23,11 @@
        <center> <button class="button icon-left ion-ios-plus button-positive"  ng-click="addnewMod()">Add Modules</button>
           </center>
     </div>
-    
+  
+  <div class="item item-body">
+    <span><i style="float: right;color: black;" class="icon ion-android-delete" ng-click="delPro(pid)" ui-sref-opts="{reload: true, inherit: false}">Delete Project</i>
+</span>
+  </div>  
 
 <div class="list card" ng-show="addModfrm">
 
@@ -48,6 +52,7 @@
   <!-- List of Modules -->
     <ion-list ng-show="showmds">
       <ion-item ng-repeat="mods in moddata track by $index" class="item" ui-sref="app.module-main({moduleid : mods.moduleid})"  ui-sref-opts="{reload: true}">
+      
        <h2>NAME : <b>{{mods.modulename}}</b></h2>
       <p>DESCRIPTION : {{mods.moduledesc}} </p>
       </ion-item>

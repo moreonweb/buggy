@@ -22,3 +22,7 @@
         
     </form>
     </div>
+
+
+    form shouulld blank affter submit
+projects screen should show error msg on no projects

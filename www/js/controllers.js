@@ -301,7 +301,8 @@ angular.module('starter.controllers', [])
 
 		
 })*/
-.controller('modMainCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
+.controller('modMainCtrl', function($scope, $stateParams , Profiles,
+	$window,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
 
 			var mid = $stateParams.moduleid;
 
@@ -393,6 +394,7 @@ angular.module('starter.controllers', [])
 							});
 
 							 $scope.addBugfrm = false;
+							 $scope.bugf = {};
 						}
 
 				});								
@@ -425,6 +427,7 @@ angular.module('starter.controllers', [])
 						if(ds == "error"){
 							$ionicPopup.alert({
 									content : "Module does not have bugs"
+
 									 
 
 							});
@@ -440,6 +443,37 @@ angular.module('starter.controllers', [])
 				});	
 
 		}
+
+
+				$scope.delMod = function(modid){
+					console.log("Module id to be deleted : ",modid);
+
+						var deldata = "action=deletemodule&moduleid=" + modid;
+						$http({
+					method : 'POST',
+					url : url,
+					data : deldata,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+					var successdata = res.data;
+					console.log(successdata);
+					if(successdata[0].success == "success"){
+						
+						$ionicPopup.alert({
+									content : "Module Deleted !"
+									 
+
+							});
+
+						$state.transitionTo('app.project-detail',{projectid:successdata[0].projectid},{reload : true,notify : true});
+						
+					}
+						
+						
+				});
+				}
 })
 .controller('bugDetailCtrl', function($scope, $stateParams , Profiles,$http,$state,
 	$ionicPopup,$ionicSideMenuDelegate,$ionicModal) {
@@ -469,6 +503,36 @@ angular.module('starter.controllers', [])
 						$scope.selectedpri = $scope.bugdetail.priority;
 						$scope.selectedstat = $scope.bugdetail.status; 
 				});	
+
+				$scope.delBug = function(bugtodel){
+						console.log("Bug id to be deleted : ",bugtodel);
+
+						var deldata = "action=deletebug&bugid=" + bugtodel;
+						$http({
+					method : 'POST',
+					url : url,
+					data : deldata,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+					var successdata = res.data;
+					console.log(successdata);
+					if(successdata[0].success == "success"){
+						
+						$ionicPopup.alert({
+									content : "Bug Deleted !"
+									 
+
+							});
+
+						$state.transitionTo('app.module-main',{moduleid:successdata[0].moduleid},{reload : true,notify : true});
+						
+					}
+						
+						
+				});
+				}
 					
 					
 })
@@ -538,9 +602,10 @@ angular.module('starter.controllers', [])
 .controller('ProjectDetailCtrl', function($scope, $stateParams , Profiles,$http,$state,$ionicPopup,$ionicSideMenuDelegate) {
 
 			var pid = $stateParams.projectid;
-
+			$scope.pid = pid;
 						// Toggle
 		$scope.addModfrm = false;
+
 		$scope.addnewMod = function(){
 			$scope.addModfrm = $scope.addModfrm ? false : true;
 		}
@@ -597,6 +662,7 @@ angular.module('starter.controllers', [])
 							});
 
 							 $scope.addModfrm = false;
+							 $scope.modf = {};
 						}
 
 
@@ -627,6 +693,38 @@ angular.module('starter.controllers', [])
 		}
 
 
+			// Delete project : 
+			$scope.delPro = function(pid){
+				console.log("Bug id to be deleted : ",pid);
+
+						var deldata = "action=deleteproject&projectid=" + pid;
+						$http({
+					method : 'POST',
+					url : url,
+					data : deldata,
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).then(function(res){
+					var successdata = res.data;
+					console.log(successdata);
+					if(successdata[0].success == "success"){
+						
+						$ionicPopup.alert({
+									content : "Project Deleted !"
+									 
+
+							});
+
+				$state.transitionTo('app.listproj',{},{reload : true,notify : true});
+						
+					}
+						
+						
+				});
+			}
+
+
 
 })
 //get list of team members under one leader
@@ -647,6 +745,7 @@ angular.module('starter.controllers', [])
 
 
 			}
+
 
 });
 

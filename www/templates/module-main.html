@@ -10,6 +10,9 @@
   </div>
   
 </div>
+<div class="card">
+<i class="icon ion-android-delete" ng-click="delMod(mod_detail_data.moduleid)" ui-sref-opts="{reload: true, inherit: false}">Delete Module</i>
+</div>
  <div class="list card">
 
 <a class="item item-icon-left" ng-repeat="bug in bugsbystatus">
@@ -17,7 +20,7 @@
    <h3 class="sub-header">{{bug.status}}</h3>
    <span class="badge badge-assertive">{{bug.bugs}}</span>
  </a>
-
+ 
  
 
 

@@ -13,7 +13,9 @@
         <div class="item item-body">
           <button class="button button-block" ui-sref="app.bugedit({bugid : bugdetail.bugid})">Update bug</button>
         </div>
-
+        <div class="item item-body">
+<i class="icon ion-android-delete" ng-click="delBug(bugdetail.bugid)" ui-sref-opts="{reload: true, inherit: false}">Delete Bug</i>
+</div>
        
 
   </ion-content>
